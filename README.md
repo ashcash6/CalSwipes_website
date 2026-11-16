@@ -1,49 +1,46 @@
-# CalSwipes website
+# CalSwipes — website
 
-A dependency-free static website with Home, Support, and Privacy Policy pages. No client JavaScript, database, authentication, tracking, external fonts, or stock photography.
+The marketing, support, and privacy site for **[CalSwipes](https://apps.apple.com/us/app/calswipes/id6815878177)**, a free iPhone app that helps UC Berkeley students turn Berkeley Dining menus into meals that fit their calorie and nutrition goals.
+
+**[Download on the App Store →](https://apps.apple.com/us/app/calswipes/id6815878177)**
+
+## Pages
+
+| Page | Path | Purpose |
+|---|---|---|
+| Home | `dist/index.html` | Product overview and App Store link |
+| Support | `dist/support/index.html` | Contact and help |
+| Privacy Policy | `dist/privacy/index.html` | Linked from App Store Connect |
+
+## Design principles
+
+- **Zero dependencies:** plain HTML and CSS, with no frameworks, client JavaScript, or build step
+- **Private by default:** no tracking, analytics, cookies, or external fonts
+- **Fast:** the whole site is a few static files in `dist/`
 
 ## Run locally
-
-Install Node.js if needed, open a terminal in this folder, and run:
 
 ```sh
 node serve.mjs
 ```
 
-Open http://127.0.0.1:4173. Stop the server with Ctrl+C. All published files are in `dist/`; no build is necessary.
+Then open http://127.0.0.1:4173.
 
-## Deploy to GitHub Pages
+## Deploy
 
-1. Create a GitHub repository and upload this folder's contents, including `dist/` and `.github/workflows/pages.yml`.
-2. In the repository's Settings → Pages, select **GitHub Actions** as the source.
-3. Push to the `main` branch (or run the “Deploy static website” workflow manually).
-4. Open the URL shown by the successful Pages deployment.
+All published files live in `dist/`. There is no build step, so any static host works:
 
-The workflow publishes only `dist/`. Relative links work for both a repository URL (such as `https://USERNAME.github.io/REPOSITORY/`) and a custom domain. `/support` and `/privacy` resolve to directory pages; GitHub Pages normally redirects these to `/support/` and `/privacy/`. Under a repository URL, include the repository prefix. Use the final Pages URL plus `support/` and `privacy/` in App Store Connect.
-
-The `.openai/hosting.json` file is used only for the separately hosted Sites copy. GitHub Pages does not need it.
-
-## Add the App Store URL
-
-In `dist/index.html`, search for `APP_STORE_URL`. Replace the disabled button with the anchor described in that comment, using the real, verified App Store listing URL. Remove the “App Store link coming soon” text, keeping “Free for iPhone” if still accurate. No App Store URL has been invented.
-
-## Update support email
-
-Search for `support.calswipes@gmail.com` in `dist/support/index.html` and `dist/privacy/index.html`. Replace both the visible email text and every `mailto:` destination.
-
-## Update the privacy policy
-
-Edit `dist/privacy/index.html`. Search for `Last updated: September 24, 2026` to change the date. Keep the policy aligned with the released app's actual behavior. The current text uses only the supplied facts. Manual dining-hall selection is deliberately omitted because it was unverified.
-
-## Connect a custom domain later
-
-For GitHub Pages, add the domain in Settings → Pages → Custom domain, and configure the DNS records at your domain provider following GitHub's official guide. Enable HTTPS once available. For this Actions deployment, keep the custom domain configured in the repository settings. If migrating the domain to another host, update DNS for that host instead.
-
-- [GitHub Pages publishing setup](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
-- [Custom domains](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)
+- **GitHub Pages:** handled by `.github/workflows/pages.yml` on every push to `main`
+- **Vercel:** Framework preset *Other*, no build command, output directory `dist`
 
 ## Editing
 
-Edit the HTML files directly. Shared presentation is in `dist/styles.css`; each page embeds the same small CalSwipes favicon. Keep relative links intact. After any edit, preview all three pages at desktop and mobile sizes and redeploy.
+- Shared styles are in `dist/styles.css`.
+- The support email (`support.calswipes@gmail.com`) appears in `dist/support/` and `dist/privacy/`. Update both if it changes.
+- Keep the privacy policy aligned with the app's actual behavior, and update its "Last updated" date after edits.
 
-© 2026 Ashkon Chaghajerdi and Dylan Brown
+## Team
+
+Built by **Ashkon Chaghajerdi** and **Dylan Brown** at UC Berkeley.
+
+*CalSwipes is an independent app and is not affiliated with, endorsed by, or sponsored by the University of California, Berkeley.*
